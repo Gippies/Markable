@@ -1,5 +1,6 @@
 package com.gippies.markable.greeting;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class GreetingController {
+
+    @Autowired
+    private GreetingService service;
+
     @GetMapping("/greeting")
     public String greeting(Model model) {
         model.addAttribute("greeting", new Greeting());
@@ -17,6 +22,7 @@ public class GreetingController {
     @PostMapping("/greeting")
     public String greetingSubmit(@ModelAttribute Greeting greeting, Model model) {
         model.addAttribute("greeting", greeting);
+        service.save(greeting);
         return "result";
     }
 }
