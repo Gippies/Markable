@@ -1,0 +1,25 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Markable</title>
+</head>
+    <body>
+        <h1>Available Greetings</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Content</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="greeting, stat : ${greetingList}">
+                    <td th:text="${greeting.getId()}" ></td>
+                    <td th:text="${greeting.getContent()}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
