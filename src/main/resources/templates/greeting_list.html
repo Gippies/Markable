@@ -18,6 +18,7 @@
                 <tr th:each="greeting, stat : ${greetingList}">
                     <td th:text="${greeting.getId()}" ></td>
                     <td th:text="${greeting.getContent()}"></td>
+                    <td><a th:href="@{'/greeting/' + ${greeting.getId()}}">details</a></td>
                 </tr>
             </tbody>
         </table>
