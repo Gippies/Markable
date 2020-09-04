@@ -33,7 +33,7 @@ public class GreetingController {
     public String greetingSubmit(@ModelAttribute Greeting greeting, Model model) {
         model.addAttribute("greeting", greeting);
         service.save(greeting);
-        return "result";
+        return "greeting_detail";
     }
 
     @GetMapping("/greeting/{id}")
