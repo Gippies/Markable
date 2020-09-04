@@ -1,5 +1,6 @@
 package com.gippies.markable.greeting;
 
+import com.gippies.markable.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,9 @@ public class GreetingController {
     @GetMapping("/greeting/{id}")
     public String greetingDetail(@PathVariable long id, Model model) {
         Greeting greeting = service.get(id);
+        if (greeting == null) {
+            throw new ResourceNotFoundException("The greeting was not found in the db.");
+        }
         model.addAttribute(greeting);
         return "greeting_detail";
     }
