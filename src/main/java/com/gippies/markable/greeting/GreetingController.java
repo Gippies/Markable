@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -23,9 +24,9 @@ public class GreetingController {
     }
 
     @GetMapping("/greeting")
-    public String greeting(Model model) {
+    public String greetingForm(Model model) {
         model.addAttribute("greeting", new Greeting());
-        return "greeting";
+        return "greeting_form";
     }
 
     @PostMapping("/greeting")
@@ -33,5 +34,12 @@ public class GreetingController {
         model.addAttribute("greeting", greeting);
         service.save(greeting);
         return "result";
+    }
+
+    @GetMapping("/greeting/{id}")
+    public String greetingDetail(@PathVariable long id, Model model) {
+        Greeting greeting = service.get(id);
+        model.addAttribute(greeting);
+        return "greeting_detail";
     }
 }

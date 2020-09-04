@@ -21,11 +21,11 @@ public class GreetingService {
         repo.save(greeting);
     }
 
-    public Greeting get(Integer id) {
-        return repo.findById(id).get();
+    public Greeting get(Long id) {
+        return repo.findById(id).orElse(null);
     }
 
-    public void delete(Integer id) {
+    public void delete(Long id) {
         repo.deleteById(id);
     }
 }
