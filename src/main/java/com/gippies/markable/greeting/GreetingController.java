@@ -15,11 +15,11 @@ import java.util.List;
 public class GreetingController {
 
     @Autowired
-    private GreetingService service;
+    private GreetingService greetingService;
 
     @GetMapping("/greetings")
     public String greetings(Model model) {
-        List<Greeting> greetingList = service.listAll();
+        List<Greeting> greetingList = greetingService.listAll();
         model.addAttribute("greetingList", greetingList);
         return "greeting_list";
     }
@@ -33,13 +33,13 @@ public class GreetingController {
     @PostMapping("/greeting")
     public String greetingSubmit(@ModelAttribute Greeting greeting, Model model) {
         model.addAttribute("greeting", greeting);
-        service.save(greeting);
+        greetingService.save(greeting);
         return "greeting_detail";
     }
 
     @GetMapping("/greeting/{id}")
     public String greetingDetail(@PathVariable long id, Model model) {
-        Greeting greeting = service.get(id);
+        Greeting greeting = greetingService.get(id);
         if (greeting == null) {
             throw new ResourceNotFoundException("The greeting was not found in the db.");
         }

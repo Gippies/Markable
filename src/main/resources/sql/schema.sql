@@ -6,19 +6,25 @@ create table greeting
         primary key (id)
 );
 
-CREATE TABLE `authorities` (
-   `username` varchar(50) NOT NULL,
-   `authority` varchar(50) NOT NULL,
-   UNIQUE KEY `authorities_idx_1` (`username`,`authority`),
-   CONSTRAINT `authorities_ibfk_1`
-   FOREIGN KEY (`username`)
-   REFERENCES `users` (`username`)
+create table users
+(
+    `id`       bigint(11) unsigned NOT NULL AUTO_INCREMENT,
+    `username` varchar(100) not null,
+    `password` varchar(100) not null,
+    `enabled`  boolean     not null,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `username_unique` (`username`)
 );
 
-
-CREATE TABLE `users` (
-     `username` varchar(50) NOT NULL,
-     `password` varchar(50) NOT NULL,
-     `enabled` tinyint(1) NOT NULL,
-     PRIMARY KEY (`username`)
+create table authorities
+(
+    `id`        bigint(11) unsigned NOT NULL AUTO_INCREMENT,
+    `user_id`   bigint(11) unsigned NOT NULL,
+    `authority` varchar(50) not null,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `authorities_unique` (`user_id`, `authority`)
 );
+
+ALTER TABLE `authorities`
+    ADD CONSTRAINT `fk_authorities`
+        FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
