@@ -11,11 +11,6 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String successfulLogin() {
-        return "hello";
-    }
-
     @GetMapping("/hello")
     public String hello() {
         return "hello";
