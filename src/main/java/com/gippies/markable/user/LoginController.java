@@ -17,7 +17,7 @@ public class LoginController {
     private UserService userService;
 
     @Autowired
-    private UserAuthorityRepository userAuthorityRepo;
+    private UserAuthorityService userAuthorityService;
 
     @GetMapping("/login")
     public String login() {
@@ -52,7 +52,7 @@ public class LoginController {
         authority.setAuthority("BOARD");
         authority.setUser(user);
         userService.save(user);
-        userAuthorityRepo.save(authority);
+        userAuthorityService.save(authority);
         return "index";
     }
 }
