@@ -21,22 +21,22 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "user_login";
     }
 
     @GetMapping("/hello")
     public String hello() {
-        return "hello";
+        return "user_hello";
     }
 
     @PostMapping("/logout")
     public String logout() {
-        return "login";
+        return "user_login";
     }
 
     @GetMapping("/register")
     public String registerForm() {
-        return "register";
+        return "user_register";
     }
 
     @PostMapping("/register")
