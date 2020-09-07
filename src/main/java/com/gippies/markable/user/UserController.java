@@ -1,8 +1,10 @@
 package com.gippies.markable.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +26,11 @@ public class UserController {
         return "user_login";
     }
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "user_hello";
+    @GetMapping("/profile")
+    public String profile(Authentication authentication, Model model) {
+        UserDTO user = userService.getByUsername(authentication.getName());
+        model.addAttribute("user", user);
+        return "user_profile";
     }
 
     @PostMapping("/logout")
