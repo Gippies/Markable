@@ -1,5 +1,6 @@
 package com.gippies.markable.user;
 
+import com.gippies.markable.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,6 +30,9 @@ public class UserController {
     @GetMapping("/profile")
     public String profile(Authentication authentication, Model model) {
         UserDTO user = userService.getByUsername(authentication.getName());
+        if (user == null) {
+            throw new ResourceNotFoundException("The logged in user was not found in the db. This should never happen.");
+        }
         model.addAttribute("user", user);
         return "user_profile";
     }
