@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS greeting;
 create table greeting
 (
     id int auto_increment,
@@ -6,6 +7,7 @@ create table greeting
         primary key (id)
 );
 
+DROP TABLE IF EXISTS users;
 create table users
 (
     `id`       bigint(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -16,6 +18,7 @@ create table users
     UNIQUE KEY `username_unique` (`username`)
 );
 
+DROP TABLE IF EXISTS authorities;
 create table authorities
 (
     `id`        bigint(11) unsigned NOT NULL AUTO_INCREMENT,
